@@ -1,7 +1,7 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Extra
 
 
-class User(BaseModel):
+class User(BaseModel, extra=Extra.forbid):
     id: int
     email: str
     first_name: str
@@ -9,12 +9,12 @@ class User(BaseModel):
     avatar: str
 
 
-class Support(BaseModel):
+class Support(BaseModel, extra=Extra.forbid):
     url: str
     text: str
 
 
-class UserResponse(BaseModel):
+class UserResponse(BaseModel, extra=Extra.forbid):
     page: int
     per_page: int
     total: int

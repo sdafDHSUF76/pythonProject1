@@ -1,12 +1,12 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Extra
 
 
-class User(BaseModel):
+class User(BaseModel, extra=Extra.forbid):
     name: str
     job: str
 
 
-class UserResponse(BaseModel):
+class UserResponse(BaseModel, extra=Extra.forbid):
     name: str
     job: str
     id: str
