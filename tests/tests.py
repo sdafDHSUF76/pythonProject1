@@ -1,6 +1,6 @@
 import requests
 
-domen = 'http://127.0.0.1:8002'
+domen = 'http://127.0.0.1:8003'
 path = '/api/users'
 url = ''.join((domen, path))
 

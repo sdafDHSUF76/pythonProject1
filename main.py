@@ -6,9 +6,9 @@ from typing import Optional
 import uvicorn
 from fastapi import FastAPI, Query
 
-from schema_create_users import User
-from schema_create_users import UserResponse as UserCreateResponse
-from schema_get_users import UserResponse
+from endpoints.create_users.schema_create_users import User
+from endpoints.create_users.schema_create_users import UserResponse as UserCreateResponse
+from endpoints.get_users.schema_get_users import UserResponse
 
 app = FastAPI()
 
@@ -58,9 +58,9 @@ def get_users(
 ):
     """Ендпоинт для получения данных о юзерах.
 
-    Есть вовзможность получения среза данных через page, per_page параметров в url-е.
+    Есть возможность получения среза данных через page, per_page параметрами в url-е.
     """
-    users_data: list[dict] = _get_json('users_data.json')
+    users_data: list[dict] = _get_json('endpoints/get_users/users_data.json')
     default_per_page = 6
     default_number_page = 1
     total_users = len(users_data)
@@ -68,7 +68,7 @@ def get_users(
     page: int = page if page else default_number_page
     total_pages: int = _calculate_total_pages(total_users, per_page)
     users_on_page = _get_users_on_page(page, per_page, total_pages, users_data)
-    support_data: dict = _get_json('support_data.json')
+    support_data: dict = _get_json('endpoints/get_users/support_data.json')
 
     return UserResponse(
         page=page,
@@ -84,8 +84,8 @@ def get_users(
 async def post_create_users(request_payload: User):
     """Ендпоинт для создания данных о юзере.
 
-    В теле запроса указываем name, job и юзер создается(точнее он дополняется к уже созданным
-    юзерам) в данных user_data.json.
+    В теле запроса указываем name, job и юзер создается(на самом деле не создается, по тому тесту
+    что я делал там выходит что и не нужно эту логику делать)
     """
     return UserCreateResponse(
         name=request_payload.name,
