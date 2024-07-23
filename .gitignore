@@ -1,0 +1,6 @@
+.venv/
+**/.pytest_cache
+.idea
+setup.cfg
+*.iml
+*.xml
