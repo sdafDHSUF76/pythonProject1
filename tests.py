@@ -11,7 +11,7 @@ def test_job_name_from_request_returns_in_response():
 
     response = requests.post(url, json={"name": name, "job": job})
     body = response.json()
-
+    assert response.status_code == 201
     assert body["name"] == name
     assert body["job"] == job
 
